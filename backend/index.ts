@@ -5,7 +5,7 @@ const app = express();
 
 const port = 5000;
 
-const front = express.static(__dirname + "/../frontend");
+const front = express.static(__dirname + "/../frontend/public");
 //Statics
 app.use(front);
 
@@ -13,7 +13,7 @@ app.use(front);
 app.use("/api", Router);
 
 app.get("/", (request, response) => {
-  response.sendFile(__dirname + "/../frontend/index.html");
+  response.sendFile(__dirname + "/../frontend/public/index.html");
 });
 
 app.listen(port, () => {

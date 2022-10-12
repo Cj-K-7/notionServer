@@ -1,9 +1,7 @@
-const baseURL = window.location.origin;
-
 const getUsers = async () => {
-  await fetch();
+  // await fetch();
 };
 
-const APIs = { getUser };
+const APIs = { getUsers };
 
 export default APIs;

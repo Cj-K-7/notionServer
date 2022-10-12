@@ -1,5 +1,14 @@
-# Notion API
+# PLAYBOARD with Notion API
 
-- Notion API 를 활용한 Server
+Notion API 를 활용한 Server 와 Client 제작
 
-> EXPRESS
+## Frameworks & Libraries
+
+> Backend
+
+- EXPRESS
+- Node
+
+> FrontEnd
+
+- TBD
