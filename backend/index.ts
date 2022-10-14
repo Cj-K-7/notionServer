@@ -1,5 +1,6 @@
 import express from "express";
 import Router from "./routes";
+import cors from "cors";
 
 const app = express();
 
@@ -8,6 +9,7 @@ const port = 5000;
 const front = express.static(__dirname + "/../frontend/public");
 //Statics
 app.use(front);
+app.use(cors());
 
 //Routers
 app.use("/api", Router);
