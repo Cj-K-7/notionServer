@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import "./Canvas.css";
-import WebGL from "./WebGl";
+import WebGL from "./WebGL";
 
 interface ICanvas extends React.CanvasHTMLAttributes<HTMLCanvasElement> {}
 

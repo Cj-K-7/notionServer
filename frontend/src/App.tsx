@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Canvas from "./Components/Global/Canvas";
+import Canvas from "./Components/Canvas/Canvas";
 
 function App() {
   useEffect(() => {
