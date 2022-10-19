@@ -9,7 +9,7 @@ const notion = new Client({
 
 export const searchDatabases = async () => {
   const databases = await notion.search({
-    query: "제일기획, MX MDE S23-Diamond 제작",
+    query: "Status",
     filter: { property: "object", value: "database" },
   });
   return databases;
