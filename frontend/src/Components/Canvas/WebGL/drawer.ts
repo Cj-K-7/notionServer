@@ -98,4 +98,6 @@ const drawScene = (
   }
 };
 
-export default { drawScene };
+const drawer = { drawScene };
+
+export default drawer;

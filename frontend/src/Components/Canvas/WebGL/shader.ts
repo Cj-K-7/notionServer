@@ -75,7 +75,7 @@ const loadShader = (
 };
 
 /**
- * Initiate  Shader Programs(Frag / Vertx)
+ * Initiate  Shader Programs(Frag / Vertx). it means attach shader'program to canvas
  * @param gl
  * @returns WebGLProgram
  */
@@ -99,6 +99,7 @@ const initShaderProgram = (gl: WebGLRenderingContext) => {
             shaderProgram
           )}`
         );
+
       return resolve(shaderProgram);
     } catch (error) {
       if (error instanceof Error) reject(error);
@@ -106,4 +107,6 @@ const initShaderProgram = (gl: WebGLRenderingContext) => {
   });
 };
 
-export default { loadShader, initShaderProgram };
+const shader = { loadShader, initShaderProgram };
+
+export default shader;

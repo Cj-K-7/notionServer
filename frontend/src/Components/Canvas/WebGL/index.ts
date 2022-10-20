@@ -47,8 +47,9 @@ const init = () => {
 const start = async (canvas: HTMLCanvasElement, gl: WebGLRenderingContext) => {
   return new Promise<void>(async (resolve, reject) => {
     try {
+      //Init Shader
       const shaderProgram = await shader.initShaderProgram(gl);
-      const buffers = await buffer.initBuffers(gl);
+      //Declare Program
       const programInfo: WebGLProgramInformation = {
         program: shaderProgram,
         attribLocations: {
@@ -69,6 +70,9 @@ const start = async (canvas: HTMLCanvasElement, gl: WebGLRenderingContext) => {
           ),
         },
       };
+      //Init Buffer
+      const buffers = await buffer.initBuffers(gl);
+      //Drawing Scene
       drawer.drawScene(gl, programInfo, buffers);
     } catch (error) {
       if (error instanceof Error) reject(error);

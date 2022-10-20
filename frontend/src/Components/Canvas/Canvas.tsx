@@ -11,7 +11,7 @@ const Canvas: React.FC<ICanvas> = (props) => {
   return (
     <div>
       <canvas id="glCanvas" {...props}>
-        Your browser doesn't appear to support the HTML5{" "}
+        Your browser doesn't appear to support the HTML5
         <code>&lt;canvas&gt;</code> element.
       </canvas>
     </div>

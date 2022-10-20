@@ -1,9 +1,17 @@
+/*Buffer
+
+webgl shader에 32비트 부동소수(float) 데이터를 전달해야하기 떄문에 필요.
+
+위치 / 법선 / 텍스처 좌표 /정점 색상 등을 포함.
+2진 데이터 버퍼를 의미.
+*/
+
 export type Buffers = {
   position: WebGLBuffer;
   color: WebGLBuffer;
 };
 /**
- * Init target Buffers
+ * Init target Buffers : rendering data
  * @param gl
  * @returns
  */
@@ -52,4 +60,6 @@ const initBuffers = (gl: WebGLRenderingContext) => {
   });
 };
 
-export default { initBuffers };
+const buffers = { initBuffers };
+
+export default buffers;
