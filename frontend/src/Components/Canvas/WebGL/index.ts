@@ -72,8 +72,18 @@ const start = async (canvas: HTMLCanvasElement, gl: WebGLRenderingContext) => {
       };
       //Init Buffer
       const buffers = await buffer.initBuffers(gl);
-      //Drawing Scene
-      drawer.drawScene(gl, programInfo, buffers);
+
+      let then = 0;
+      //Draw scene repeatedly
+      const render = (now: number) => {
+        now *= 0.001;
+        const deltaTime = now - then;
+        then = now;
+        //Drawing Scene
+        drawer.drawScene(gl, programInfo, buffers, deltaTime);
+        requestAnimationFrame(render);
+      };
+      requestAnimationFrame(render);
     } catch (error) {
       if (error instanceof Error) reject(error);
     }

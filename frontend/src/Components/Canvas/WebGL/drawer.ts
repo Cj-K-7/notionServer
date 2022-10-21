@@ -2,10 +2,13 @@ import { mat4 } from "gl-matrix";
 import { WebGLProgramInformation } from ".";
 import { Buffers } from "./buffer";
 
+let squareRotation = 0.0;
+
 const drawScene = (
   gl: WebGLRenderingContext,
   programInfo: WebGLProgramInformation,
-  buffers: Buffers
+  buffers: Buffers,
+  deltaTime?: number
 ) => {
   gl.clearColor(0.0, 0.0, 0.0, 1.0); // Clear to black, fully opaque
   gl.clearDepth(1.0); // Clear everything
@@ -34,6 +37,13 @@ const drawScene = (
     modelViewMatrix, // matrix to translate
     [-0.0, 0.0, -6.0]
   ); // amount to translate
+
+  mat4.rotate(
+    modelViewMatrix, // destination matrix
+    modelViewMatrix, // matrix to rotate
+    squareRotation, // amount to rotate in radians
+    [0, 1, 0]
+  ); // axis to rotate around
 
   // Tell WebGL how to pull out the positions from the position
   // buffer into the vertexPosition attribute.
@@ -96,6 +106,7 @@ const drawScene = (
     const vertexCount = 4;
     gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount);
   }
+  if (deltaTime) squareRotation += deltaTime;
 };
 
 const drawer = { drawScene };
