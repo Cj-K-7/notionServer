@@ -20,7 +20,7 @@ const drawScene = (
       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
       //Camera View Config
-      const fieldOfView = (45 * Math.PI) / 180; // in radians
+      const fieldOfView = (60 * Math.PI) / 180; // in radians
       const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
       const zNear = 0.1;
       const zFar = 100.0;

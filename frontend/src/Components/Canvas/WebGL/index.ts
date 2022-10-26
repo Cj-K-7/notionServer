@@ -23,7 +23,7 @@ export type WebGLProgramInformation = {
  * @returns Promise : WebGLRenderingContext
  */
 const init = () => {
-  return new Promise<WebGLContexts>(async (resolve, reject) => {
+  return new Promise<WebGLRenderingContext>(async (resolve, reject) => {
     try {
       const canvas = document.getElementById("glCanvas") as HTMLCanvasElement;
       if (!canvas) throw new Error("No Canvas for WebGL");
@@ -32,7 +32,7 @@ const init = () => {
         throw new Error(
           "Unable to initialize WebGL. Your browser may not support it."
         );
-      return resolve({ canvas, gl });
+      return resolve(gl);
     } catch (error) {
       if (error instanceof Error) reject(error);
     }
@@ -44,7 +44,7 @@ const init = () => {
  * @param canvas
  * @param gl
  */
-const start = async (canvas: HTMLCanvasElement, gl: WebGLRenderingContext) => {
+const start = async (gl: WebGLRenderingContext) => {
   return new Promise<void>(async (resolve, reject) => {
     try {
       //Init Shader
@@ -84,6 +84,7 @@ const start = async (canvas: HTMLCanvasElement, gl: WebGLRenderingContext) => {
         requestAnimationFrame(render);
       };
       requestAnimationFrame(render);
+      resolve();
     } catch (error) {
       if (error instanceof Error) reject(error);
     }

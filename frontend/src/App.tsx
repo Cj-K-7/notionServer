@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import Canvas from "./Components/Canvas/Canvas";
+import { useEffect } from "react";
+import Router from "./Router";
 
 function App() {
   useEffect(() => {
     fetch("http://localhost:5000/api/listAll");
   }, []);
-  return <Canvas />;
+  return <Router />;
 }
 
 export default App;

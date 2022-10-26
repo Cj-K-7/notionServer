@@ -6,7 +6,7 @@ interface ICanvas extends React.CanvasHTMLAttributes<HTMLCanvasElement> {}
 
 const Canvas: React.FC<ICanvas> = (props) => {
   useEffect(() => {
-    WebGL.init().then(({ canvas, gl }) => WebGL.start(canvas, gl));
+    WebGL.init().then((glContext) => WebGL.start(glContext));
   }, []);
   return (
     <div>
