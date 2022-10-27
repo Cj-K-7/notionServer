@@ -11,4 +11,5 @@ Notion API 를 활용한 Server 와 Client 제작
 
 > FrontEnd
 
-- TBD
+- React with TS
+- WebGL
