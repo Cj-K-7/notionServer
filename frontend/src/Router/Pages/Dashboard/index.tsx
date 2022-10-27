@@ -1,6 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * minimum 'seconds' for set App to 'idle' state
+ */
+const idleTime: number = 10;
+
 const Dashboard = () => {
   //Hooks
   const navigate = useNavigate();
@@ -14,14 +19,14 @@ const Dashboard = () => {
       navigate("/canvas");
     };
     const timeReseter = () => {
-      console.log("hello");
       clearTimeout(timer);
-      timer = setTimeout(timeOutCallback, 7000);
+      timer = setTimeout(timeOutCallback, idleTime * 1000);
     };
+
     //Init timer on window loaded
     window.onload = timeReseter;
 
-    //Reset Every interactions by EventListener
+    //Reset timer on user's interactions by EventListener
     document.addEventListener("click", timeReseter);
     document.addEventListener("mousemove", timeReseter);
     document.addEventListener("touchstart", timeReseter);
@@ -29,6 +34,7 @@ const Dashboard = () => {
     document.addEventListener("keydown", timeReseter);
 
     return () => {
+      //Get rid of every EventListener added by this componenet
       document.removeEventListener("click", timeReseter);
       document.removeEventListener("mousemove", timeReseter);
       document.removeEventListener("touchstart", timeReseter);

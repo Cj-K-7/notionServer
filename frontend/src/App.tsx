@@ -3,7 +3,8 @@ import Router from "./Router";
 
 function App() {
   useEffect(() => {
-    fetch("http://localhost:5000/api/listAll");
+    console.log("App start!");
+    // fetch("http://localhost:5000/api/listAll");
   }, []);
   return <Router />;
 }
