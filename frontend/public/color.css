@@ -1,29 +1,46 @@
 :root{
-    /* theme */
-    --bg-lime: rgb(244, 255, 223);
-    --text-white: rgba(226,226,226,1);
-    --text-black: rgba(33,33,33,1);
-    --btn-green: rgba(66,185,116,1);
-    --border-black : rgba(47,47,47,1);
-    --shader-black: rgba(0,0,0,0.43);
+    /*True color*/
+    --red: rgba(255,0,0,1);
+    --yellow: rgba(255,255,0,1);
+    --lime : rgba(145, 255, 0, 1);
+    --green: rgba(0,255,0,1);
+    --teal : rgba(0, 128, 128,1);
+    --cyan: rgba(0,255,255,1);
+    --blue: rgba(0,0,255,1);
+    --white:rgba(255,255,255,1);
+    --gray : rgba(120,120,120,1);
     --black: rgba(0,0,0,1);
 
-    /*True color*/
-    --yellow: rgba(255,255,0,1);
-    --green: rgba(0,255,0,1);
-    --red: rgba(255,0,0,1);
-    --blue: rgba(0,0,255,1);
-
     /*Light color*/
-    --yellow-light: rgba(225,235,100,1);
-    --green-light: rgba(100,255,100,1);
-    --red-light: rgba(255,100,100,1);
-    --blue-light: rgba(100,100,255,1);
+    --red-light: rgba(235,100,100,1);
+    --yellow-light: rgba(235,235,100,1);
+    --lime-light : rgba(205, 255, 160, 1);
+    --green-light: rgba(100,235,100,1);
+    --teal-light : rgb(95, 194, 194);
+    --cyan-light: rgba(100, 255, 255,1);
+    --blue-light: rgba(100,100,235,1);
+    --gray-light: rgba(180,180,180,1);
+    --black-light: rgba(47,47,47,1);
 
     /*dim color*/
-    --yellow-dim: rgba(225,235,0,0.43);
-    --green-dim: rgba(0,255,0,0.43);
-    --red-dim: rgba(255,0,0,0.43);
-    --blue-dim: rgba(0,0,255,0.43);
+    --red-dim: rgba(255,0,0,0.48);
+    --yellow-dim: rgba(255,255,0,0.48);
+    --green-dim: rgba(0,255,0,0.48);
+    --teal-dim : rgba(0, 128, 128,0.48);
+    --cyan-dim : rgba(0,255,255,0.48);
+    --blue-dim: rgba(0,0,255,0.48);
+    --white-dim:rgba(255,255,255,0.48);
+    --gray-dim : rgba(120,120,120,0.48);
+    --black-dim: rgba(0,0,0,0.48);
 
+    /* theme */
+    --bg: var(--lime-light);
+    --border : var(--black-light);
+    --shadow: var(--black-dim);
+    --text-white: var(--white);
+    --text-black: var(--black);
+    --checked: var(--teal-light);
+    --unchecked: var(--gray-dim);
+    --btn: var(--teal-light);
+    --btn-text: var(--white);
   }

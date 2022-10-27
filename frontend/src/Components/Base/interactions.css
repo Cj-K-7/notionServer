@@ -1,0 +1,67 @@
+/*Button Section*/
+div.btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+button.btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.3rem 0.5rem;
+    gap: 0.3rem;
+    border-radius: 0.5rem;
+    color: var(--btn-text);
+    background-color: var(--btn);
+}
+
+
+/*Toggle Section*/
+div.toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+label.toggle {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+label.toggle::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    width: 2.5rem;
+    height: 1.5rem;
+    border-radius: 1rem;
+    background-color: var(--toggle-unchecked);
+}
+
+label.toggle.checked::before {
+    background-color: var(--toggle-checked);
+}
+
+label.toggle::after {
+    content: "";
+    position: absolute;
+    right: 0.3rem;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--white);
+}
+
+label.toggle.checked::after {
+    right: 1.2rem;
+}
+
+input.toggle {
+    opacity: 0;
+}

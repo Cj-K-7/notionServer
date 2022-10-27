@@ -1,12 +1,15 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../../../Components/Base/Button";
+import Toggle from "../../../Components/Base/Toggle";
+import Layout from "../../../Layout/Layout";
 
 /**
  * minimum 'seconds' for set App to 'idle' state
  */
-const idleTime: number = 10;
+const idleTime: number = 60;
 
-const Dashboard = () => {
+const Home = () => {
   //Hooks
   const navigate = useNavigate();
 
@@ -16,7 +19,7 @@ const Dashboard = () => {
   useEffect(() => {
     let timer: NodeJS.Timeout;
     const timeOutCallback = () => {
-      navigate("/canvas");
+      // navigate("/canvas");
     };
     const timeReseter = () => {
       clearTimeout(timer);
@@ -43,7 +46,7 @@ const Dashboard = () => {
     };
   }, []);
 
-  return <div>Dashboard</div>;
+  return <Layout main={<Button title="TEST">TEST</Button>} />;
 };
 
-export default Dashboard;
+export default Home;
