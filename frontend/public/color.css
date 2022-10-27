@@ -1,0 +1,29 @@
+:root{
+    /* theme */
+    --bg-lime: rgb(244, 255, 223);
+    --text-white: rgba(226,226,226,1);
+    --text-black: rgba(33,33,33,1);
+    --btn-green: rgba(66,185,116,1);
+    --border-black : rgba(47,47,47,1);
+    --shader-black: rgba(0,0,0,0.43);
+    --black: rgba(0,0,0,1);
+
+    /*True color*/
+    --yellow: rgba(255,255,0,1);
+    --green: rgba(0,255,0,1);
+    --red: rgba(255,0,0,1);
+    --blue: rgba(0,0,255,1);
+
+    /*Light color*/
+    --yellow-light: rgba(225,235,100,1);
+    --green-light: rgba(100,255,100,1);
+    --red-light: rgba(255,100,100,1);
+    --blue-light: rgba(100,100,255,1);
+
+    /*dim color*/
+    --yellow-dim: rgba(225,235,0,0.43);
+    --green-dim: rgba(0,255,0,0.43);
+    --red-dim: rgba(255,0,0,0.43);
+    --blue-dim: rgba(0,0,255,0.43);
+
+  }
