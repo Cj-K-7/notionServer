@@ -19,10 +19,10 @@ export type WebGLProgramInformation = {
 };
 
 /**
- * Initailize GL & find "#glCanvas" and get context of WebGL
+ * Initialize WebGL on "#glCanvas" and get context of WebGL
  * @returns Promise : WebGLRenderingContext
  */
-const init = () => {
+const initialize = () => {
   return new Promise<WebGLRenderingContext>(async (resolve, reject) => {
     try {
       const canvas = document.getElementById("glCanvas") as HTMLCanvasElement;
@@ -40,7 +40,7 @@ const init = () => {
 };
 
 /**
- * Set basic config of Canvas for GL & Start WebGL Context
+ * Set basic config of WebGL Context
  * @param canvas
  * @param gl
  */
@@ -91,6 +91,13 @@ const start = async (gl: WebGLRenderingContext) => {
   });
 };
 
-const WebGL = { init, start };
+/**
+ * End Process of WebGl Rendering Context
+ */
+const finish = (gl: WebGLRenderingContext) => {
+  gl.finish();
+};
+
+const WebGL = { initialize, start, finish };
 
 export default WebGL;
