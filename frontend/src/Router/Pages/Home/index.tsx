@@ -46,7 +46,16 @@ const Home = () => {
     };
   }, []);
 
-  return <Layout main={<Button title="TEST">TEST</Button>} />;
+  return (
+    <Layout
+      main={
+        <>
+          <Button title="TEST">TEST</Button>
+          <Toggle id="title" />
+        </>
+      }
+    />
+  );
 };
 
 export default Home;
