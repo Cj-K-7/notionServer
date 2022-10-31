@@ -19,9 +19,10 @@ export type Buffers = {
 const initBuffers = (gl: WebGLRenderingContext) => {
   return new Promise<Buffers>((resolve, reject) => {
     try {
-      //Position Buffer
+      /** Position Buffer : 총 6개의 면에 대한 Coordinate System 기준으로 vertice 1개의 X , Y , Z 축 위치를 선언한다. */
       const positions = [
         // Front face
+        //x , y , z 총 3개의 요소로 12개의 Float이 1개의 face(면) 위치 데이터를 제공
         -1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0, 1.0, 1.0, -1.0, 1.0, 1.0,
 
         // Back face
@@ -42,13 +43,14 @@ const initBuffers = (gl: WebGLRenderingContext) => {
       const positionBuffer = gl.createBuffer();
       if (!positionBuffer) throw new Error("Can't create Position-Buffer");
       gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+      //여기서 32bit 부동소수(float)는 32bit로 이진 데이터(0 / 1)로 이루어진 숫자 배열
       gl.bufferData(
         gl.ARRAY_BUFFER,
         new Float32Array(positions),
         gl.STATIC_DRAW
       );
 
-      //Color Buffer
+      /**Color Buffer : 총 6면에 대한 RGBA float 값 배열로 이루어진 data*/
       const faceColors = [
         [1.0, 1.0, 1.0, 1.0], // Front face: white
         [1.0, 0.0, 0.0, 1.0], // Back face: red
