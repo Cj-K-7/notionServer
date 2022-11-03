@@ -69,7 +69,9 @@ const initBuffers = (gl: WebGLRenderingContext) => {
       gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
       gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(colors), gl.STATIC_DRAW);
 
-      //Indices Buffer
+      /**Index Buffer : 6면체에 필요한 점은 총 24개이지만 8개의 점(vertex)로 충분히 육면체를 만들수 있기 떄문에,
+       *같은 점의 순서를 정해줘서 vertex 위치를 정렬된 Array Buffer 로 전달해주는 Data
+       **/
       const indices = [
         0,
         1,

@@ -62,8 +62,10 @@ const drawScene = (
       // Tell WebGL how to pull out the positions from the position
       // buffer into the vertexPosition attribute.
       {
+        /** 3D에서 필요한 X Y Z 좌표 Depth- Coordinate system */
         const numComponents = 3;
-        const type = gl.FLOAT; // the data in the buffer is 32bit floats
+        /** the data in the buffer is 32bit floats */
+        const type = gl.FLOAT;
         const normalize = false; // don't normalize
         const stride = 0;
         const offset = 0;
@@ -81,8 +83,10 @@ const drawScene = (
       // Tell WebGL how to pull out the colors from the color buffer
       // into the vertexColor attribute.
       {
+        /** 필요한 Color data depth - RGBA */
         const numComponents = 4;
-        const type = gl.FLOAT; // the data in the buffer is 32bit floats
+        /** the data in the buffer is 32bit floats */
+        const type = gl.FLOAT;
         const normalize = false; // don't normalize
         const stride = 0;
         const offset = 0;
@@ -99,6 +103,9 @@ const drawScene = (
       }
 
       {
+        /** 1쌍의 삼각형으로 이루어진 1면을 Cube의 vertex array에 각 삼각형 점을 적용(indexing)하기 해주는데,
+         * 삼각형의 12면으로 이루어진 큐브가 되어 12 X 3 , 총 36개의 점이 생성된다.
+         */
         const vertexCount = 36;
         const type = gl.UNSIGNED_SHORT;
         const offset = 0;
