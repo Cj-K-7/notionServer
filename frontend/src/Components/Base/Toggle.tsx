@@ -1,14 +1,14 @@
-import "./interactions.css";
+import "./toggle.css";
 import { useState } from "react";
 
 //fixed Variables
 const toggle = "toggle" as const;
 
-//Interface
+/**Toggle input Interface based on HTML input element*/
 interface IToggle extends React.InputHTMLAttributes<HTMLInputElement> {}
 
-/**Must-HAVEe props :
- * @param [string] id
+/**Input Toggle[checkbox] type with label
+ * * MUST-HAVE props : @param [string] id
  */
 const Toggle: React.FC<IToggle> = ({ ...props }) => {
   const [checked, setChecked] = useState<boolean>(false);

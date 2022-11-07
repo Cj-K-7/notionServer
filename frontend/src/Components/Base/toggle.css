@@ -1,22 +1,3 @@
-/*Button Section*/
-div.btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-}
-
-button.btn {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.3rem 0.5rem;
-    gap: 0.3rem;
-    border-radius: 0.5rem;
-    color: var(--btn-text);
-    background-color: var(--btn);
-}
-
-
 /*Toggle Section*/
 div.toggle {
     width: 100%;
@@ -26,7 +7,7 @@ div.toggle {
 }
 
 input.toggle {
-    opacity: 1;
+    opacity: 0;
 }
 
 label.toggle {
