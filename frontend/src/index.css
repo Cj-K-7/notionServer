@@ -24,6 +24,14 @@ button {
   border: none;
 }
 
+a{
+ text-decoration: none;
+}
+
+a:visited{
+  color:inherit
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

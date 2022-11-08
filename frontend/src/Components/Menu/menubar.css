@@ -3,24 +3,24 @@ header.menubar{
 position: fixed;
 }
 
-header.menubar section{
+section.nav.depths{
     
 }
 
-nav {
+section.nav.depths nav {
     border-bottom: 1px solid black;
 }
 
-.nav-depths ol {
+section.nav.depths nav ol {
     list-style-type: none;
     padding-left: 0;
 }
 
-li.nav-depth{
+li.nav.depth{
     display: inline-block;
 }
 
-.nav-depth a::after {
+li.nav.depth a::after {
     display: inline-block;
     color: #000;
     content: '>';
@@ -28,3 +28,8 @@ li.nav-depth{
     font-weight: bold;
     padding: 0 3px;
 }
+
+section.nav.links{}
+section.nav.links ul{}
+li.nav.link{}
+li.nav.link a{}
