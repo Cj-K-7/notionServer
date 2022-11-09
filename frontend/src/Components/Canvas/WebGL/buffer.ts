@@ -8,6 +8,7 @@ webgl shader에 32비트 부동소수(float) 데이터를 전달해야하기 떄
 
 export type Buffers = {
   position: WebGLBuffer;
+  textureCoord: WebGLBuffer;
   color: WebGLBuffer;
   indices: WebGLBuffer;
 };
@@ -118,8 +119,36 @@ const initBuffers = (gl: WebGLRenderingContext) => {
         new Uint16Array(indices),
         gl.STATIC_DRAW
       );
+
+      const textureCoordBuffer = gl.createBuffer();
+      if (!textureCoordBuffer)
+        throw new Error("Can't create Texture-Coord-Buffer");
+      gl.bindBuffer(gl.ARRAY_BUFFER, textureCoordBuffer);
+
+      const textureCoordinates = [
+        // Front
+        0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0,
+        // Back
+        0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0,
+        // Top
+        0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0,
+        // Bottom
+        0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0,
+        // Right
+        0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0,
+        // Left
+        0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0,
+      ];
+
+      gl.bufferData(
+        gl.ARRAY_BUFFER,
+        new Float32Array(textureCoordinates),
+        gl.STATIC_DRAW
+      );
+
       return resolve({
         position: positionBuffer,
+        textureCoord: textureCoordBuffer,
         color: colorBuffer,
         indices: indexBuffer,
       });

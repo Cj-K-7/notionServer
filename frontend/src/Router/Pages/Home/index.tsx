@@ -5,7 +5,7 @@ import Menubar from "../../../Components/Menu/Menubar";
 /**
  * minimum 'seconds' for set App to 'idle' state
  */
-const idleTime: number = 60;
+const idleTime: number = 2;
 
 const Home = () => {
   //Hooks

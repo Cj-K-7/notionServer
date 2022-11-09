@@ -1,6 +1,7 @@
 import shader from "./shader";
 import buffer from "./buffer";
 import drawer from "./drawer";
+import textureLoader from "./texture";
 
 export type WebGLContexts = {
   canvas: HTMLCanvasElement;
@@ -10,11 +11,13 @@ export type WebGLProgramInformation = {
   program: WebGLProgram;
   attribLocations: {
     vertexPosition: number;
+    textureCoord: number;
     vertexColor: number;
   };
   uniformLocations: {
     projectionMatrix: WebGLUniformLocation | null;
     modelViewMatrix: WebGLUniformLocation | null;
+    uSampler: WebGLUniformLocation | null;
   };
 };
 
@@ -57,6 +60,7 @@ const start = async (gl: WebGLRenderingContext) => {
             shaderProgram,
             "aVertexPosition"
           ),
+          textureCoord: gl.getAttribLocation(shaderProgram, "aTextureCoord"),
           vertexColor: gl.getAttribLocation(shaderProgram, "aVertexColor"),
         },
         uniformLocations: {
@@ -68,11 +72,22 @@ const start = async (gl: WebGLRenderingContext) => {
             shaderProgram,
             "uModelViewMatrix"
           ),
+          uSampler: gl.getUniformLocation(shaderProgram, "uSampler"),
         },
       };
       //Init Buffer
       const buffers = await buffer.initBuffers(gl);
+      // Load texture
+      const texture = await textureLoader(gl, "cubetexture.png");
+      // Flip image pixels into the bottom-to-top order that WebGL expects.
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+      gl.activeTexture(gl.TEXTURE0);
 
+      // Bind the texture to texture unit 0
+      gl.bindTexture(gl.TEXTURE_2D, texture);
+
+      // Tell the shader we bound the texture to texture unit 0
+      gl.uniform1i(programInfo.uniformLocations.uSampler, 0);
       let then = 0;
       //Draw scene repeatedly
       const render = (now: number) => {
@@ -80,7 +95,7 @@ const start = async (gl: WebGLRenderingContext) => {
         const deltaTime = now - then;
         then = now;
         //Drawing Scene
-        drawer.drawScene(gl, programInfo, buffers, deltaTime);
+        drawer.drawScene(gl, programInfo, buffers, texture, deltaTime);
         requestAnimationFrame(render);
       };
       requestAnimationFrame(render);

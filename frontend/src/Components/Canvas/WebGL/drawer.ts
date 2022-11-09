@@ -8,6 +8,7 @@ const drawScene = (
   gl: WebGLRenderingContext,
   programInfo: WebGLProgramInformation,
   buffers: Buffers,
+  texture: WebGLTexture,
   deltaTime?: number
 ) => {
   return new Promise<void>((resolve, reject) => {
@@ -80,26 +81,45 @@ const drawScene = (
         );
         gl.enableVertexAttribArray(programInfo.attribLocations.vertexPosition);
       }
+      //---------------------COLOR---------------------
       // Tell WebGL how to pull out the colors from the color buffer
       // into the vertexColor attribute.
+      // {
+      //   /** 필요한 Color data depth - RGBA */
+      //   const numComponents = 4;
+      //   /** the data in the buffer is 32bit floats */
+      //   const type = gl.FLOAT;
+      //   const normalize = false; // don't normalize
+      //   const stride = 0;
+      //   const offset = 0;
+      //   gl.bindBuffer(gl.ARRAY_BUFFER, buffers.color);
+      //   gl.vertexAttribPointer(
+      //     programInfo.attribLocations.vertexColor,
+      //     numComponents,
+      //     type,
+      //     normalize,
+      //     stride,
+      //     offset
+      //   );
+      //   gl.enableVertexAttribArray(programInfo.attribLocations.vertexColor);
+      // }
+      // tell webgl how to pull out the texture coordinates from buffer
       {
-        /** 필요한 Color data depth - RGBA */
-        const numComponents = 4;
-        /** the data in the buffer is 32bit floats */
-        const type = gl.FLOAT;
+        const num = 2; // every coordinate composed of 2 values
+        const type = gl.FLOAT; // the data in the buffer is 32-bit float
         const normalize = false; // don't normalize
-        const stride = 0;
-        const offset = 0;
-        gl.bindBuffer(gl.ARRAY_BUFFER, buffers.color);
+        const stride = 0; // how many bytes to get from one set to the next
+        const offset = 0; // how many bytes inside the buffer to start from
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffers.textureCoord);
         gl.vertexAttribPointer(
-          programInfo.attribLocations.vertexColor,
-          numComponents,
+          programInfo.attribLocations.textureCoord,
+          num,
           type,
           normalize,
           stride,
           offset
         );
-        gl.enableVertexAttribArray(programInfo.attribLocations.vertexColor);
+        gl.enableVertexAttribArray(programInfo.attribLocations.textureCoord);
       }
 
       {
@@ -136,6 +156,8 @@ const drawScene = (
       }
       if (!deltaTime) throw new Error("Delta Time is undefined");
       cubeRotation += deltaTime;
+
+      return resolve();
     } catch (error) {
       if (error instanceof Error) reject(error);
     }
