@@ -1,11 +1,11 @@
 /*Button Section*/
-div.btn {
+div.button {
     width: 100%;
     display: flex;
     align-items: center;
 }
 
-button.btn {
+button.button {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -19,7 +19,7 @@ button.btn {
     transition: 0.963s;
 }
 
-button.btn:active{
+button.button:active{
     opacity: 0.3;
     transition: 0s;
 }

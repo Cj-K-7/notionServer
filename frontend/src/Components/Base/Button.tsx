@@ -1,6 +1,8 @@
 import "./button.css";
 
-/**Button Interface based on HTML button element*/
+const button = "button" as const;
+
+/**Button Interface*/
 interface IButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 /** Button Conponent with default action-[button] type
@@ -8,8 +10,8 @@ interface IButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
  */
 const Button: React.FC<IButton> = ({ ...props }) => {
   return (
-    <div className="btn">
-      <button className="btn" type="button" {...props}>
+    <div className={button + "container"}>
+      <button className={button} type="button" {...props}>
         {props.children || "No children"}
       </button>
     </div>
