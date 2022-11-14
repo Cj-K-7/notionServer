@@ -15,10 +15,10 @@ const item = fieldset + "_item";
  * }
  */
 interface IFieldset extends React.FieldsetHTMLAttributes<HTMLFieldSetElement> {
-  type: "radio" | "checkbox";
-  keyword: string;
-  listName: string;
-  listData: { label: string; value: string | number }[];
+  type?: "radio" | "checkbox";
+  keyword?: string;
+  listName?: string;
+  listData?: { label: string; value: string | number }[];
   defaultValue?: string | number;
 }
 
@@ -28,7 +28,7 @@ const Fieldset: React.FC<IFieldset> = ({ ...props }) => {
       <legend className={fieldset} title={props.listName}>
         {props.listName}
       </legend>
-      {props.listData.map(({ label, value }) => (
+      {props.listData?.map(({ label, value }) => (
         <div className={item} key={label}>
           <input
             className={item}
