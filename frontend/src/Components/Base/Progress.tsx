@@ -1,6 +1,7 @@
 import "./progress.css";
 
 const progress = "progress" as const;
+
 /**Progress Interface HTML progress Elements with label */
 interface IProgress extends React.ProgressHTMLAttributes<HTMLProgressElement> {
   label?: string;

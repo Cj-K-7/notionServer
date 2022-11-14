@@ -12,7 +12,7 @@ interface IToggle extends React.InputHTMLAttributes<HTMLInputElement> {
  */
 const Toggle: React.FC<IToggle> = ({ ...props }) => {
   return (
-    <div className={toggle + "container"} title={props.title}>
+    <div className={toggle + " container"} title={props.title}>
       <label
         className={toggle + (props.checked ? " checked" : "")}
         htmlFor={props.id}
