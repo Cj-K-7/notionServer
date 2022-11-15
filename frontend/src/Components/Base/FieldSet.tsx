@@ -1,8 +1,4 @@
-import { useMemo, useState } from "react";
 import "./fieldset.css";
-
-const fieldset = "fieldset";
-const item = fieldset + "_item";
 
 /**Fieldset-legend Interface
  * @props keyword : Formdata key name
@@ -15,30 +11,34 @@ const item = fieldset + "_item";
  * }
  */
 interface IFieldset extends React.FieldsetHTMLAttributes<HTMLFieldSetElement> {
-  type?: "radio" | "checkbox";
-  keyword?: string;
+  type: "radio" | "checkbox";
+  keyword: string;
   listName?: string;
   listData?: { label: string; value: string | number }[];
   defaultValue?: string | number;
 }
 
 const Fieldset: React.FC<IFieldset> = ({ ...props }) => {
+  //class
+  const fieldClass = ["fieldset", props.className].join(" ");
+  const itemClass = ["fieldset", "item", props.className].join(" ");
+
   return (
-    <fieldset className={fieldset} {...props}>
-      <legend className={fieldset} title={props.listName}>
+    <fieldset className={fieldClass} {...props}>
+      <legend className={fieldClass} title={props.listName}>
         {props.listName}
       </legend>
       {props.listData?.map(({ label, value }) => (
-        <div className={item} key={label}>
+        <div className={itemClass} key={label}>
           <input
-            className={item}
+            className={itemClass}
             id={label}
             type={props.type}
             name={props.keyword}
             value={value}
             defaultChecked={value === props.defaultValue}
           />
-          <label className={item} htmlFor={label}>
+          <label className={itemClass} htmlFor={label}>
             {label}
           </label>
         </div>

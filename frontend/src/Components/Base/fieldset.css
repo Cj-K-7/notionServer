@@ -5,11 +5,11 @@ fieldset>legend.fieldset {
 
 }
 
-fieldset div.fieldset_item{}
-fieldset div label.fieldset_item{}
-fieldset div label.fieldset_item:hover{}
-fieldset div input.fieldset_item{}
-fieldset div input.fieldset_item[type="radio"]{}
-fieldset div input.fieldset_item[type="radio"]:checked{}
-fieldset div input.fieldset_item[type="checkbox"]{}
-fieldset div input.fieldset_item[type="checkbox"]:checked{}
+fieldset div.fieldset.item{}
+fieldset div label.fieldset.item{}
+fieldset div label.fieldset.item:hover{}
+fieldset div input.fieldset.item{}
+fieldset div input.fieldset.item[type="radio"]{}
+fieldset div input.fieldset.item[type="radio"]:checked{}
+fieldset div input.fieldset.item[type="checkbox"]{}
+fieldset div input.fieldset.item[type="checkbox"]:checked{}

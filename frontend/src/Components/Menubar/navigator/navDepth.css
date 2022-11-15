@@ -1,8 +1,3 @@
-header.menubar{
-    display: flex;
-position: fixed;
-}
-
 section.nav.depths{
     
 }
@@ -28,8 +23,3 @@ li.nav.depth a::after {
     font-weight: bold;
     padding: 0 3px;
 }
-
-section.nav.links{}
-section.nav.links ul{}
-li.nav.link{}
-li.nav.link a{}

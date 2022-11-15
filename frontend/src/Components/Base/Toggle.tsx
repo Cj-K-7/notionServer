@@ -1,9 +1,8 @@
 import "./toggle.css";
 
-const toggle = "toggle" as const;
-
 /**Toggle input Interface*/
 interface IToggle extends React.InputHTMLAttributes<HTMLInputElement> {
+  id: string;
   label?: string;
 }
 
@@ -11,15 +10,18 @@ interface IToggle extends React.InputHTMLAttributes<HTMLInputElement> {
  * * MUST-HAVE props : @param [string] id
  */
 const Toggle: React.FC<IToggle> = ({ ...props }) => {
+  //class
+  const className = ["toggle", props.className].join(" ");
+
   return (
-    <div className={toggle + " container"} title={props.title}>
+    <div className={className} title={props.title}>
       <label
-        className={toggle + (props.checked ? " checked" : "")}
+        className={className + (props.checked ? " checked" : "")}
         htmlFor={props.id}
       >
         {props.label}
       </label>
-      <input className={toggle} type="checkbox" {...props} />
+      <input {...props} className={className} type="checkbox" />
     </div>
   );
 };

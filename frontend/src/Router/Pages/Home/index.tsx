@@ -1,19 +1,21 @@
 import { useHomeIdle } from "./home";
 import Layout from "../../../Layout/Layout";
-import Menubar from "../../../Components/Menu/Menubar";
-import Fieldset from "../../../Components/Base/FieldSet";
-import { keyboard } from "@testing-library/user-event/dist/keyboard";
+import Menubar from "../../../Components/Menubar/Menubar";
+import Main from "../../../Components/Main/Main";
 
-/**
- * minimum 'seconds' for set App to 'idle' state
- */
-const idleTime: number = 80;
+/**idle-timeout to navigate Canvas */
+const idleTimeout = 80;
+/**home page configs*/
+const homeConfig = {
+  header: <Menubar />,
+  main: <Main />,
+  footer: null,
+};
 
 const Home = () => {
   //Hooks
-  useHomeIdle(idleTime);
-
-  return <Layout header={<Menubar />} />;
+  useHomeIdle(idleTimeout);
+  return <Layout {...homeConfig} />;
 };
 
 export default Home;

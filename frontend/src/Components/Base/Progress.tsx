@@ -1,7 +1,5 @@
 import "./progress.css";
 
-const progress = "progress" as const;
-
 /**Progress Interface HTML progress Elements with label */
 interface IProgress extends React.ProgressHTMLAttributes<HTMLProgressElement> {
   label?: string;
@@ -11,12 +9,15 @@ interface IProgress extends React.ProgressHTMLAttributes<HTMLProgressElement> {
  * * MUST-HAVE props : @param [string] id
  */
 const Progress: React.FC<IProgress> = ({ ...props }) => {
+  //class
+  const className = ["progress", props.className].join(" ");
+
   return (
-    <div className={progress + "container"}>
-      <label className={progress} htmlFor={props.id}>
+    <div className={className}>
+      <label className={className} htmlFor={props.id}>
         {props.label}
       </label>
-      <progress className={progress} {...props}>
+      <progress className={className} {...props}>
         {props.value}
       </progress>
     </div>

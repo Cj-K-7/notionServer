@@ -1,7 +1,5 @@
 import "./button.css";
 
-const button = "button" as const;
-
 /**Button Interface*/
 interface IButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
@@ -9,9 +7,11 @@ interface IButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
  * * MUST-HAVE prop : @param [ReactNode] children
  */
 const Button: React.FC<IButton> = ({ ...props }) => {
+  //class
+  const className = ["button", props.className].join(" ");
   return (
-    <div className={button + " container"}>
-      <button className={button} type="button" {...props}>
+    <div className={className}>
+      <button className={className} type="button" {...props}>
         {props.children || props.title}
       </button>
     </div>
