@@ -9,12 +9,16 @@ export const useHomeIdle = (idleTime: number) => {
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
+
     const timeOutCallback = () => {
       navigate("/canvas");
     };
+
     const timeReseter = () => {
       clearTimeout(timer);
-      timer = setTimeout(timeOutCallback, idleTime * 1000);
+      if (idleTime > 0) {
+        timer = setTimeout(timeOutCallback, idleTime * 1000);
+      }
     };
 
     //Init timer on window loaded

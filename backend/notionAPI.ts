@@ -7,9 +7,9 @@ const notion = new Client({
   auth: process.env.NOTION_TOKEN,
 });
 
-export const searchDatabases = async () => {
+export const searchDatabases = async (query?: string) => {
   const databases = await notion.search({
-    query: "Status",
+    query,
     filter: { property: "object", value: "database" },
   });
   return databases;

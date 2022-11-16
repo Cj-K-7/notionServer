@@ -7,9 +7,11 @@ const router = express.Router();
 
 //List All
 const listAllHandler: Handler = async (request, response) => {
-  const databases = await searchDatabases();
-  return response.send(databases);
+  const query = request.query.query as string;
+  const allDatabases = await searchDatabases(query);
+  return response.send(allDatabases);
 };
+
 router.route("/listAll").get(listAllHandler);
 
 //@User

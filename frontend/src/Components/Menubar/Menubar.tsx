@@ -1,7 +1,6 @@
-import { useState } from "react";
-import "./menubar.css";
 import NavDepth from "./navigator/NavDepth";
 import NavLink from "./navigator/NavLink";
+import "./menubar.css";
 
 interface IMenubar extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -11,8 +10,8 @@ const Menubar: React.FC<IMenubar> = ({ ...props }) => {
 
   return (
     <div {...props} className={className}>
-      <NavDepth stacks={[]} />
-      <NavLink links={[]} />
+      <NavDepth />
+      <NavLink />
     </div>
   );
 };

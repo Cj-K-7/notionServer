@@ -4,7 +4,7 @@ import Menubar from "../../../Components/Menubar/Menubar";
 import Main from "../../../Components/Main/Main";
 
 /**idle-timeout to navigate Canvas */
-const idleTimeout = 80;
+const idleTimeout = 0;
 /**home page configs*/
 const homeConfig = {
   header: <Menubar />,
