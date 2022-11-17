@@ -1,7 +1,11 @@
 import "./main.css";
 
-const Main = () => {
-  return <div></div>;
+interface IMain extends React.HTMLAttributes<HTMLDivElement> {}
+
+const Main: React.FC<IMain> = ({ ...props }) => {
+  const className = ["main", props.className].join(" ");
+
+  return <div className={className}></div>;
 };
 
 export default Main;
