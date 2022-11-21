@@ -1,7 +1,5 @@
 const player = document.getElementById("player") as HTMLVideoElement;
 
-const { style, paused } = player;
-
 // video#player{
 //   width: 100vw;
 //   height: 100vh;
@@ -10,36 +8,33 @@ const { style, paused } = player;
 //   transition: opacity 369;
 // }
 
-let timer: NodeJS.Timeout;
-let timeout = 3000;
-
 const init = () => {
   player.currentTime = 0;
-  style.visibility = "hidden";
-  style.opacity = "0";
+  player.style.visibility = "hidden";
+  player.style.opacity = "0";
 };
 
 const on = async () => {
   return new Promise<void>((resolve, reject) => {
     try {
-      style.visibility = "visible";
-      style.opacity = "1";
+      player.style.visibility = "visible";
+      player.style.opacity = "1";
     } catch (error) {
       throw new Error("video activate failed" + error);
     }
-    style.visibility === "visible" ? resolve() : reject();
+    player.style.visibility === "visible" ? resolve() : reject();
   });
 };
 
 const off = async () => {
   return new Promise<void>(async (resolve, reject) => {
     try {
-      style.opacity = "0";
-      setTimeout(() => (style.visibility = "hidden"), 369);
+      player.style.opacity = "0";
+      setTimeout(() => (player.style.visibility = "hidden"), 369);
     } catch (error) {
       throw new Error("video deactivate failed" + error);
     }
-    style.visibility === "hidden" ? resolve() : reject();
+    player.style.visibility === "hidden" ? resolve() : reject();
   });
 };
 
@@ -59,45 +54,6 @@ const pause = async () => {
   return;
 };
 
-const timerCallback = async () => {
-  await play();
-  await on();
-};
-
-timer = setTimeout(timerCallback, timeout);
-const timerReseter = () => {
-  console.log(timer);
-  clearTimeout(timer);
-  timer = setTimeout(timerCallback, timeout);
-};
-
-player.onplay = async () => {};
-player.onpause = async () => {
-  await off();
-};
-player.onclick = async () => {
-  try {
-    if (paused) return;
-    await pause();
-    console.log("click player");
-    timerReseter();
-    console.log(timer);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-window.onclick = () => {
-  console.log("click window");
-  timerReseter();
-  console.log(timer);
-};
-window.onkeydown = () => {
-  timerReseter();
-};
-
-init();
-
-const playerController = { on, off, playVideo: play, pause };
+const playerController = { init, on, off, play, pause };
 
 export default playerController;
