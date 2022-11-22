@@ -1,36 +1,13 @@
 dialog.modal{
-    top:0;
-    left:0;
-    right: 0;
-    bottom: 0;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border: none;
+    background-color: transparent;
+}
 
-}
-dialog:not(open).modal {
-    display: none;
-}
-dialog.modal::backdrop{
+dialog.modal.dim-cover::backdrop{
     background-color: rgba(0,0,0,0.3);
 }
-dialog.modal>div.modal{
-    position: absolute;
-}
-dialog.modal.top>div.modal{
-    top: 0;
-
-}
-dialog.modal.bottom>div.modal{
-    bottom: 0;
-
-}
-dialog.modal.left>div.modal{
-    left: 0;
-}
-dialog.modal.right>div.modal{
-    right: 0;
+form.modal{
+    padding : 30px;
+    border: 1px;
+    box-shadow: 1.6px 1.6px 1.6px rgba(0,0,0,0.3);
 }

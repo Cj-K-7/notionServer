@@ -1,42 +1,67 @@
 import { forwardRef } from "react";
 import "./modal.css";
 
-interface IModal extends React.DialogHTMLAttributes<HTMLDialogElement> {
-  mode: "OX" | "Warning" | "Confirm" | "Submit";
-  cover?: boolean | undefined;
-  position?: "top" | "bottom" | "left" | "right";
+interface OX {
+  type: "YesOrNo";
+  yes: string;
+  no: string;
 }
 
+interface Warning {
+  type: "Warning";
+  icon?: React.ReactNode;
+}
+
+interface Confirm {
+  type: "Confirm";
+}
+
+interface Submit {
+  type: "Submit";
+  formChildren: React.ReactNode;
+}
+
+interface AdditionalProps {
+  covered?: boolean | undefined;
+}
+
+type IModal = React.DialogHTMLAttributes<HTMLDialogElement> &
+  (OX | Warning | Confirm | Submit) &
+  AdditionalProps;
+
 const Modal = forwardRef<HTMLDialogElement, IModal>(
-  ({ mode, cover, position, ...props }, ref) => {
+  ({ type, covered, ...props }, ref) => {
     //Class
     const className = ["modal", props.className].join(" ");
-    const dialogClass = [
-      className,
-      cover ? "dim-cover" : "not-cover",
-      position ? position : "no-position",
-    ].join(" ");
+    const dialogClass = [className, covered ? "dim-cover" : "not-cover"].join(
+      " "
+    );
 
     //Render
     const modeRender = () => {
-      switch (mode) {
-        case "OX": {
-          return <button className={className}>O</button>;
+      switch (type) {
+        case "YesOrNo": {
+          return <button className={className}>ASqweqweD</button>;
         }
         case "Warning": {
-          return;
+          return <button className={className}>ASdaaD</button>;
         }
         case "Confirm": {
-          return;
+          return <button className={className}>ASssD</button>;
         }
         case "Submit": {
-          return <>{props.children}</>;
+          return (
+            <>
+              {props.children}
+              <button className={className}>ASaD</button>
+            </>
+          );
         }
       }
     };
 
     return (
-      <dialog ref={ref} {...props} className={dialogClass}>
+      <dialog {...props} ref={ref} className={dialogClass}>
         <form method="dialog" className={className}>
           {modeRender()}
         </form>
