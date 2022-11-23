@@ -21,8 +21,12 @@ interface Submit {
   formChildren: React.ReactNode;
 }
 
+type Position = "top" | "left" | "right" | "bottom";
+
+/**position : if more than 1 position you want, it must be array */
 interface AdditionalProps {
   covered?: boolean | undefined;
+  position?: Position | Position[];
 }
 
 type IModal = React.DialogHTMLAttributes<HTMLDialogElement> &
@@ -30,12 +34,13 @@ type IModal = React.DialogHTMLAttributes<HTMLDialogElement> &
   AdditionalProps;
 
 const Modal = forwardRef<HTMLDialogElement, IModal>(
-  ({ type, covered, ...props }, ref) => {
+  ({ type, covered, position, ...props }, ref) => {
     //Class
     const className = ["modal", props.className].join(" ");
     const dialogClass = [className, covered ? "dim-cover" : "not-cover"].join(
       " "
     );
+    const formClass = [className, position].flat().join(" ");
 
     //Render
     const modeRender = () => {
@@ -62,7 +67,7 @@ const Modal = forwardRef<HTMLDialogElement, IModal>(
 
     return (
       <dialog {...props} ref={ref} className={dialogClass}>
-        <form method="dialog" className={className}>
+        <form method="dialog" className={formClass}>
           {modeRender()}
         </form>
       </dialog>
