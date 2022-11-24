@@ -4,9 +4,6 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 
-//Prototype
-import "./Types/prototype";
-
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );

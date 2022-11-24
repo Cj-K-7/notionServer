@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import { classCombine } from "../../Util/cssClass";
 import "./modal.css";
 
 interface OX {
@@ -23,7 +24,9 @@ interface Submit {
 
 type Position = "top" | "left" | "right" | "bottom";
 
-/**position : if more than 1 position you want, it must be array */
+/**
+ * @param covered if covered, backdrop color will covered dark screen
+ * @param position if more than 1 position you want, it must be Array of position string */
 interface AdditionalProps {
   covered?: boolean | undefined;
   position?: Position | Position[];
@@ -36,11 +39,12 @@ type IModal = React.DialogHTMLAttributes<HTMLDialogElement> &
 const Modal = forwardRef<HTMLDialogElement, IModal>(
   ({ type, covered, position, ...props }, ref) => {
     //Class
-    const className = ["modal", props.className].join(" ");
-    const dialogClass = [className, covered ? "dim-cover" : "not-cover"].join(
-      " "
+    const className = classCombine("modal", props.className);
+    const dialogClass = classCombine(
+      className,
+      covered ? "dim-cover" : "not-cover"
     );
-    const formClass = [className, position].flat().join(" ");
+    const formClass = classCombine(className, position);
 
     //Render
     const modeRender = () => {

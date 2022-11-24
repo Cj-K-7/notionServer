@@ -106,13 +106,6 @@ const start = async (gl: WebGLRenderingContext) => {
   });
 };
 
-/**
- * End Process of WebGl Rendering Context
- */
-const finish = (gl: WebGLRenderingContext) => {
-  gl.finish();
-};
-
-const WebGL = { initialize, start, finish };
+const WebGL = { initialize, start };
 
 export default WebGL;

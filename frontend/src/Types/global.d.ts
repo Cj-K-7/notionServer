@@ -1,7 +1,4 @@
 declare global {
-  interface Array<T> {
-    classify(): string;
-  }
   type Page = {
     object: string;
     id: string;

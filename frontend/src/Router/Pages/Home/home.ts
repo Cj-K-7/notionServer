@@ -22,7 +22,7 @@ export const useHomeIdle = (idleTime: number) => {
     };
 
     //Init timer on window loaded
-    window.onload = timeReseter;
+    timeReseter();
 
     //Reset timer on user's interactions by EventListener
     document.addEventListener("click", timeReseter);
@@ -39,5 +39,5 @@ export const useHomeIdle = (idleTime: number) => {
       document.removeEventListener("touchend", timeReseter);
       document.removeEventListener("keydown", timeReseter);
     };
-  }, []);
+  }, [idleTime]);
 };

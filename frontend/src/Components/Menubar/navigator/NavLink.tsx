@@ -9,11 +9,11 @@ const NavLink: React.FC<INavLink> = ({ ...props }) => {
   const className = ["nav-link", props.className].join(" ");
 
   useEffect(() => {
-    // fetch("http://localhost:5000/api/listAll").then(async (response) => {
-    //   const data = await response.json();
-    //   const list: Page[] = data.results;
-    //   setLinks(list);
-    // });
+    fetch("http://localhost:5000/api/listAll").then(async (response) => {
+      const data = await response.json();
+      const list: Page[] = data.results;
+      setLinks(list);
+    });
   }, []);
 
   return (

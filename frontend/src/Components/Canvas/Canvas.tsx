@@ -5,17 +5,17 @@ import WebGL from "./WebGL";
 interface ICanvas extends React.CanvasHTMLAttributes<HTMLCanvasElement> {}
 
 const Canvas: React.FC<ICanvas> = (props) => {
-  const [context, setContext] = useState<WebGLRenderingContext>();
+  const [gl, setGl] = useState<WebGLRenderingContext>();
 
   // Rendering Cycle of WebGL
   useEffect(() => {
-    WebGL.initialize().then((glContext) => {
-      setContext(glContext);
-      WebGL.start(glContext);
+    WebGL.initialize().then((gl) => {
+      setGl(gl);
+      WebGL.start(gl);
     });
     return () => {
       //Finish WebGl
-      if (context) WebGL.finish(context);
+      gl?.finish();
     };
   }, []);
 
