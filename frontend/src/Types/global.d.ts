@@ -1,4 +1,5 @@
 declare global {
+  type User = {};
   type Page = {
     object: string;
     id: string;

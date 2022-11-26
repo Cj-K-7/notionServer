@@ -1,25 +1,25 @@
-section.nav.depths{
+section.navdepths{
     
 }
 
-section.nav.depths nav {
+section.navdepths nav {
     border-bottom: 1px solid black;
 }
 
-section.nav.depths nav ol {
+section.navdepths nav ol {
     list-style-type: none;
-    padding-left: 0;
 }
 
-li.nav.depth{
+li.navdepth{
     display: inline-block;
 }
 
-li.nav.depth a::after {
+li.navdepth a::after {
     display: inline-block;
     color: #000;
     content: '>';
     font-size: 80%;
     font-weight: bold;
     padding: 0 3px;
+    pointer-events: none;
 }

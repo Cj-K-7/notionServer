@@ -34,7 +34,7 @@
     --black-dim: rgba(0,0,0,0.48);
 
     /* theme */
-    --bg: rgb(255, 244, 219);
+    --bg: var(--white);
     --border : var(--black-light);
     --shadow: var(--black-dim);
     --text-white: var(--white);
