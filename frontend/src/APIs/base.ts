@@ -1,11 +1,22 @@
 class Request {
   //Base Properties
-  baseURL: string = window.location.origin;
-  request: XMLHttpRequest = new XMLHttpRequest();
-  onprogress = (event: ProgressEvent<EventTarget>) => {};
-  onload = (event: ProgressEvent<EventTarget>) => {};
-  onerror = (event: ProgressEvent<EventTarget>) => {};
-  onabort = (event: ProgressEvent<EventTarget>) => {};
+  private baseURL: string = window.location.origin;
+  private request: XMLHttpRequest = new XMLHttpRequest();
+  private onprogress = (event: ProgressEvent<EventTarget>) => {
+    if (event.lengthComputable) {
+      const progress = (event.loaded / event.total) * 100;
+      console.log(progress);
+    }
+  };
+  private onload = (event: ProgressEvent<EventTarget>) => {
+    console.log("onRequsetLoad");
+  };
+  private onerror = (event: ProgressEvent<EventTarget>) => {
+    console.log("onRequsetError");
+  };
+  private onabort = (event: ProgressEvent<EventTarget>) => {
+    console.log("onRequsetAbort");
+  };
 
   //Constructor
   constructor(baseURL?: string) {
@@ -21,24 +32,30 @@ class Request {
     route?: string,
     param?: { [key: string]: any },
     responseType?: XMLHttpRequestResponseType
-  ) {
+  ): Promise<T> {
     const GET = "GET" as const;
-    const endURL = this.baseURL + (route ? route : "") + (param ? param : "");
-    this.request.open(GET, this.baseURL, true);
+    let endURL = this.baseURL + (route ? route : "");
+    if (param) Object.entries(param);
+    this.request.open(GET, endURL, true);
     if (responseType) this.request.responseType = responseType;
-    return;
+    this.request.send();
+
+    return this.request.response;
   }
 
   async post<T>() {
     const POST = "POST" as const;
+    this.request.open(POST, this.baseURL, true);
   }
 
   async put<T>() {
     const PUT = "PUT" as const;
+    this.request.open(PUT, this.baseURL, true);
   }
 
   async delete<T>() {
     const DELETE = "DELETE" as const;
+    this.request.open(DELETE, this.baseURL, true);
   }
 }
 
