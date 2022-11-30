@@ -2,3 +2,24 @@ div.main {
     width: 100vw;
     height: 100vh;
 }
+
+div.scroll{
+    width: 300px;
+    height: 600px;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+div.scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+div#a{
+    width: 20px;
+    height: 800px;
+    margin : 40px 0px;
+    background-color: black;
+}
+div.bounce{
+    width: 100%;
+    height: 20px;
+}
