@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "notion_server",
   "version": "1.0.0",
   "description": "test for node server",
   "main": "server.js",

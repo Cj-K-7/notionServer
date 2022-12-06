@@ -3,6 +3,7 @@ import userHandlers from "../handlers/userHandler";
 import databaseHandlers from "../handlers/databaseHandler";
 import pageHandler from "../handlers/pageHandler";
 import { searchDatabases } from "../notionAPI";
+
 const router = express.Router();
 
 //List All

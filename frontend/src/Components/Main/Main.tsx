@@ -24,7 +24,6 @@ const Main: React.FC<IMain> = ({ ...props }) => {
     }
   }, [endTouchY]);
 
-  console.log(overScrollY);
   const onClick = () => {
     ref.current?.showModal();
   };
