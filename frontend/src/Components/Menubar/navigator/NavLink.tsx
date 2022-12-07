@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { classCombine } from "../../../Util/cssClass";
 import "./navLink.css";
 
 interface INavLink extends React.HTMLAttributes<HTMLElement> {}
@@ -6,7 +7,7 @@ interface INavLink extends React.HTMLAttributes<HTMLElement> {}
 const NavLink: React.FC<INavLink> = ({ ...props }) => {
   const [links, setLinks] = useState<Page[]>([]);
   //class
-  const className = ["nav-link", props.className].join(" ");
+  const className = classCombine("nav-link", props.className);
 
   useEffect(() => {
     fetch("http://localhost:5000/api/listAll").then(async (response) => {

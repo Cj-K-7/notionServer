@@ -1,4 +1,7 @@
 section.nav-link{}
-section.nav-link ul{}
+section.nav-link ol{
+    display: flex;
+}
+
 li.nav-link{}
 li.nav-link a{}

@@ -8,8 +8,7 @@ const router = express.Router();
 
 //List All
 const listAllHandler: Handler = async (request, response) => {
-  const query = request.query.query as string;
-  const allDatabases = await searchDatabases(query);
+  const allDatabases = await searchDatabases();
   return response.send(allDatabases);
 };
 
