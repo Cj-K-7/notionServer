@@ -1,3 +1,7 @@
+type Shader = "vertex" | "fragment";
+const vertex: Shader = "vertex" as const;
+const fragment: Shader = "fragment" as const;
+
 const fsSource = `
 varying highp vec2 vTextureCoord;
 
@@ -24,15 +28,12 @@ void main(void) {
 `;
 
 /**
- * Load  type shader
+ * Load  {type}-shader
  * @param gl
  * @param shader_type
  * @returns fragmentShader | vertexShader
  */
-const loadShader = (
-  gl: WebGLRenderingContext,
-  shader_type: "fragment" | "vertex"
-) => {
+const loadShader = (gl: WebGLRenderingContext, shader_type: Shader) => {
   return new Promise<WebGLShader>(async (resolve, reject) => {
     try {
       switch (shader_type) {
@@ -44,7 +45,7 @@ const loadShader = (
             if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
               gl.deleteShader(fragmentShader);
               throw new Error(
-                "An error occurred compiling the Fragment shaders: " +
+                "An error occurred during compiling the Fragment shaders: " +
                   gl.getShaderInfoLog(fragmentShader)
               );
             }
@@ -60,7 +61,7 @@ const loadShader = (
             if (!gl.getShaderParameter(vertextShader, gl.COMPILE_STATUS)) {
               gl.deleteShader(vertextShader);
               throw new Error(
-                "An error occurred compiling the Vertext shaders: " +
+                "An error occurred during compiling the Vertext shaders: " +
                   gl.getShaderInfoLog(vertextShader)
               );
             }
@@ -84,8 +85,8 @@ const loadShader = (
 const initShaderProgram = (gl: WebGLRenderingContext) => {
   return new Promise<WebGLProgram>(async (resolve, reject) => {
     try {
-      const fragmentShader = await loadShader(gl, "fragment");
-      const vertexShader = await loadShader(gl, "vertex");
+      const fragmentShader = await loadShader(gl, fragment);
+      const vertexShader = await loadShader(gl, vertex);
 
       // Create the shader program
       const shaderProgram = gl.createProgram();
@@ -109,6 +110,6 @@ const initShaderProgram = (gl: WebGLRenderingContext) => {
   });
 };
 
-const shader = { loadShader, initShaderProgram };
+const shader = { initShaderProgram };
 
 export default shader;
