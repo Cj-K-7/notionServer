@@ -1,6 +1,7 @@
 class Request {
   //Base Properties
-  private baseURL: string = window.location.origin;
+  // private baseURL: string = window.location.origin;
+  private baseURL: string = "http://localhost:5000/api";
   private request: XMLHttpRequest = new XMLHttpRequest();
   private onprogress = (event: ProgressEvent<EventTarget>) => {
     if (event.lengthComputable) {
@@ -8,13 +9,13 @@ class Request {
       console.log(progress);
     }
   };
-  private onload = (event: ProgressEvent<EventTarget>) => {
-    console.log("onRequsetLoad");
+  private onload = async (event: ProgressEvent<EventTarget>) => {
+    console.log(this.request.response);
   };
-  private onerror = (event: ProgressEvent<EventTarget>) => {
+  private onerror = async (event: ProgressEvent<EventTarget>) => {
     console.log("onRequsetError");
   };
-  private onabort = (event: ProgressEvent<EventTarget>) => {
+  private onabort = async (event: ProgressEvent<EventTarget>) => {
     console.log("onRequsetAbort");
   };
 
@@ -30,17 +31,22 @@ class Request {
   //Methods
   async get<T>(
     route?: string,
-    param?: { [key: string]: any },
+    query?: { [key: string]: any },
     responseType?: XMLHttpRequestResponseType
   ): Promise<T> {
-    const GET = "GET" as const;
-    let endURL = this.baseURL + (route ? route : "");
-    if (param) Object.entries(param);
-    this.request.open(GET, endURL, true);
-    if (responseType) this.request.responseType = responseType;
-    this.request.send();
-
-    return this.request.response;
+    return new Promise((resolve, reject) => {
+      const GET = "GET" as const;
+      let endURL = this.baseURL + (route ? route : "");
+      try {
+        if (query) Object.entries(query);
+        this.request.open(GET, endURL, true);
+        if (responseType) this.request.responseType = responseType;
+        this.request.send();
+        resolve(this.request.response);
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
 
   async post<T>() {

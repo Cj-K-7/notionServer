@@ -25,19 +25,18 @@ export const useHomeIdle = (idleTime: number) => {
     timeReseter();
 
     //Reset timer on user's interactions by EventListener
-    document.addEventListener("click", timeReseter);
-    document.addEventListener("mousemove", timeReseter);
-    document.addEventListener("touchstart", timeReseter);
-    document.addEventListener("touchend", timeReseter);
-    document.addEventListener("keydown", timeReseter);
-
+    document.onclick =
+      document.onmouseup =
+      document.ontouchend =
+      document.onkeydown =
+        timeReseter;
     return () => {
       //Get rid of every EventListener added by this componenet
-      document.removeEventListener("click", timeReseter);
-      document.removeEventListener("mousemove", timeReseter);
-      document.removeEventListener("touchstart", timeReseter);
-      document.removeEventListener("touchend", timeReseter);
-      document.removeEventListener("keydown", timeReseter);
+      document.onclick =
+        document.onmouseup =
+        document.ontouchend =
+        document.onkeydown =
+          null;
     };
   }, [idleTime]);
 };

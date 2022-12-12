@@ -15,7 +15,8 @@ const listAllHandler: Handler = async (request, response) => {
 router.route("/listAll").get(listAllHandler);
 
 //@User
-router.route("/users").get(userHandlers.get);
+router.route("/user").get(userHandlers.getUser);
+router.route("/users").get(userHandlers.getUsers);
 
 //@Database
 router.route("/database").get(databaseHandlers.get);

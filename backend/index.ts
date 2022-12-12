@@ -1,6 +1,7 @@
 import express from "express";
 import Router from "./routes";
 import cors from "cors";
+import errorRequsetHandler from "./handlers/errorHandler";
 
 const app = express();
 
@@ -10,6 +11,7 @@ const front = express.static(__dirname + "/../frontend/public");
 //Statics
 app.use(front);
 app.use(cors());
+app.use(errorRequsetHandler);
 
 //Routers
 app.use("/api", Router);
