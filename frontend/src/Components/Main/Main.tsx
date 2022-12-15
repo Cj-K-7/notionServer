@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { player } from "../../App";
 import Queue from "../../Class/Queue";
 import { classCombine } from "../../Util/cssClass";
 import "./main.css";
@@ -11,7 +12,11 @@ interface IMain extends React.HTMLAttributes<HTMLDivElement> {}
 const Main: React.FC<IMain> = ({ ...props }) => {
   const className = classCombine("main", props.className);
 
-  const toggleDequeue = () => {
+  const go = async () => {
+    await player.play();
+  };
+
+  const toggleDequeue = async () => {
     queue.isAutoDequeueing
       ? queue.deactivateAutoDequeque()
       : queue.activateAutoDequeque();
@@ -29,6 +34,9 @@ const Main: React.FC<IMain> = ({ ...props }) => {
       </button>
       <button type="button" onClick={enqueue}>
         Enqueue
+      </button>
+      <button type="button" onClick={go}>
+        go
       </button>
     </div>
   );

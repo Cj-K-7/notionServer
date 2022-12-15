@@ -15,6 +15,7 @@ const homeConfig = {
 const Home = () => {
   //Hooks
   useHomeIdle(idleTimeout);
+
   return <Layout {...homeConfig} />;
 };
 

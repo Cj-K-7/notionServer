@@ -1,0 +1,16 @@
+video#media_player{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    object-fit: contain;
+    background-color: black;
+    visibility: hidden;
+    transition-property: opacity;
+    transition-duration: 369ms;
+    opacity: 0;
+    z-index: 1;
+}
