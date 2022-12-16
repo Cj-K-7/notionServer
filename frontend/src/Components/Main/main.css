@@ -5,3 +5,7 @@ div.main {
     justify-content: center;
     align-items: center;
 }
+
+div.main button{
+    z-index: 2;
+}

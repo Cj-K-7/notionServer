@@ -17,10 +17,10 @@ class MediaPlayer {
   private isPause: boolean = false;
   /** Is video in loop sequence*/
   private isLoop: boolean = false;
+  /** Toggle for escaping loop sequence*/
+  private toogleEscapeLoop: boolean = false;
   /** Video schedule */
   private schedule: PlayerSchdule = initialSchedule;
-  /** Loop frame */
-  private loopFrame: number = 0;
 
   constructor(src?: string) {
     const video = document.createElement("video");
@@ -36,7 +36,11 @@ class MediaPlayer {
     this.video.onplay = async () => {};
     this.video.onclick = () => {
       if (this.isLoop) this.stopLoop();
-      if (this.video.paused) this.video.play();
+      if (this.isPause) {
+        this.video.play();
+        this.isPause = false;
+        console.log("-------resume-------");
+      }
     };
     this.video.onpause = () => {
       console.log("video puased");
@@ -58,10 +62,7 @@ class MediaPlayer {
   private deactivateVideo() {
     this.isPlaying = false;
     this.video.style.opacity = fadeOut;
-    setTimeout(() => {
-      this.video.style.visibility = hidden;
-      this.setSchedule(initialSchedule);
-    }, transitionTime);
+    setTimeout(() => (this.video.style.visibility = hidden), transitionTime);
   }
 
   /**Set video source */
@@ -79,9 +80,13 @@ class MediaPlayer {
    * @param schedule
    * @unit millisecond
    */
-  public setSchedule(schedule: PlayerSchdule) {
-    this.video.currentTime = schedule[0];
-    this.schedule = schedule;
+  public async setSchedule(schedule: PlayerSchdule) {
+    return new Promise<void>((resolve) => {
+      const startTime = schedule[0] / 1000;
+      this.video.currentTime = startTime;
+      this.schedule = schedule;
+      setTimeout(resolve, 600);
+    });
   }
 
   /**Play Video*/
@@ -108,11 +113,15 @@ class MediaPlayer {
   private pauseOnTime(time: number) {
     return new Promise<void>((resolve) => {
       const callback = () => {
-        if (this.video.currentTime * 1000 >= time) {
+        const isFulfilled =
+          this.video.currentTime * 1000 >= time || !this.isPlaying;
+        if (isFulfilled) {
           this.video.pause();
           this.isPause = true;
+          console.log("-------pause-------");
           return resolve();
         }
+        console.log("pause frame");
         window.requestAnimationFrame(callback);
       };
       window.requestAnimationFrame(callback);
@@ -128,10 +137,14 @@ class MediaPlayer {
   public endOnTime(time: number) {
     return new Promise<void>((resolve) => {
       const callback = () => {
-        if (this.video.currentTime * 1000 >= time) {
+        const isFulfilled =
+          this.video.currentTime * 1000 >= time || !this.isPlaying;
+        if (isFulfilled) {
           this.end();
+          console.log("-------end-------");
           return resolve();
         }
+        console.log("end frame");
         window.requestAnimationFrame(callback);
       };
       window.requestAnimationFrame(callback);
@@ -143,45 +156,53 @@ class MediaPlayer {
    * @param end trigger comeback point
    */
   private loop(start: number, end: number) {
-    const callback = () => {
-      if (!this.isPlaying) return this.stopLoop();
-      if (this.video.currentTime * 1000 >= end) {
-        this.video.currentTime = start / 1000;
-        if (!this.isLoop) {
-          this.isLoop = true;
-          console.log("on loop");
+    return new Promise<void>((resolve) => {
+      const callback = () => {
+        const isFulfilled = this.toogleEscapeLoop || !this.isPlaying;
+        if (isFulfilled) {
+          this.isLoop = false;
+          this.toogleEscapeLoop = false;
+          console.log("-------off loop------");
+          return resolve();
         }
-      }
-      console.log("frame");
-      this.loopFrame = window.requestAnimationFrame(callback);
-    };
-    this.loopFrame = window.requestAnimationFrame(callback);
+        if (this.video.currentTime * 1000 >= end) {
+          this.video.currentTime = start / 1000;
+          if (!this.isLoop) {
+            this.isLoop = true;
+            console.log("-------on loop------");
+          }
+        }
+        console.log("loop frame");
+        window.requestAnimationFrame(callback);
+      };
+      window.requestAnimationFrame(callback);
+    });
   }
 
   /**Stop video loop */
   private stopLoop() {
-    window.cancelAnimationFrame(this.loopFrame);
-    this.isLoop = false;
-    console.log("off loop");
+    this.toogleEscapeLoop = true;
   }
 
-  private startEvent(event: number | PlayEvent) {
+  private async startEvent(event: number | PlayEvent) {
     if (typeof event === "number") {
-      this.pauseOnTime(event);
+      console.log("next event", JSON.parse(`{"puase" : ${event}}`));
+      await this.pauseOnTime(event);
     } else {
       const { start, end } = event;
-      this.loop(start, end);
+      console.log("next event", event);
+      await this.loop(start, end);
     }
   }
 
   /**Start schedule */
   private async startSchedule() {
-    const [_, ...events] = this.schedule;
-    for (let i = 0, promise = Promise.resolve(); i < events.length; i++) {
+    const events = this.schedule;
+    for (let i = 1, promise = Promise.resolve(); i < events.length; i++) {
+      if (!this.isPlaying) break;
       i === events.length - 1
         ? (promise = promise.then(() => this.endOnTime(events[i] as number)))
         : (promise = promise.then(() => this.startEvent(events[i])));
-      console.log(i, events[i]);
     }
   }
 }
