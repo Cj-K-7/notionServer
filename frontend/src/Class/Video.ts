@@ -34,6 +34,7 @@ class MediaPlayer {
 
     //Listener
     this.video.onplay = async () => {};
+    this.video.onseeked = (e) => {};
     this.video.onclick = () => {
       if (this.isLoop) this.stopLoop();
       if (this.isPause) {
@@ -85,7 +86,8 @@ class MediaPlayer {
       const startTime = schedule[0] / 1000;
       this.video.currentTime = startTime;
       this.schedule = schedule;
-      setTimeout(resolve, 600);
+      // setTimeout(resolve, 600);
+      resolve();
     });
   }
 
@@ -140,6 +142,7 @@ class MediaPlayer {
         const isFulfilled =
           this.video.currentTime * 1000 >= time || !this.isPlaying;
         if (isFulfilled) {
+          this.video.currentTime = 0;
           this.end();
           console.log("-------end-------");
           return resolve();
