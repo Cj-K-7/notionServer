@@ -1,4 +1,9 @@
 declare global {
+  declare const timeTest = async (func: (...args: any) => any) => {
+    await console.time("test");
+    await func();
+    await console.timeEnd("test");
+  };
   type User = {};
   type Page = {
     object: string;

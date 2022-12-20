@@ -27,6 +27,7 @@ class MediaPlayer {
     document.body.appendChild(video);
     //Default settings
     this.video = video;
+    this.video.controls = true;
     this.video.id = "media_player";
     if (src) {
       this.video.src = src;
@@ -50,20 +51,20 @@ class MediaPlayer {
       this.deactivateVideo();
     };
     this.video.onerror = (event, source, lineno, colno, error) => {
-      console.error(error);
+      console.error(event, source, lineno, colno, error);
     };
   }
 
   private activateVideo() {
     this.isPlaying = true;
-    this.video.style.visibility = visible;
-    this.video.style.opacity = fadeIn;
+    // this.video.style.visibility = visible;
+    // this.video.style.opacity = fadeIn;
   }
 
   private deactivateVideo() {
     this.isPlaying = false;
-    this.video.style.opacity = fadeOut;
-    setTimeout(() => (this.video.style.visibility = hidden), transitionTime);
+    // this.video.style.opacity = fadeOut;
+    // setTimeout(() => (this.video.style.visibility = hidden), transitionTime);
   }
 
   /**Set video source */

@@ -1,5 +1,5 @@
 video#media_player{
-    width: 100vw;
+    width: 50vw;
     height: 100vh;
     position: absolute;
     top: 0;
@@ -8,9 +8,8 @@ video#media_player{
     bottom: 0;
     object-fit: contain;
     background-color: black;
-    visibility: hidden;
     transition-property: opacity;
     transition-duration: 369ms;
-    opacity: 0;
+    opacity: 1;
     z-index: 1;
 }

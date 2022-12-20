@@ -3,24 +3,49 @@ import MediaPlayer from "./Class/Video";
 
 export const player = new MediaPlayer();
 
-console.log("Downloading video...hellip;Please wait...");
-var xhr = new XMLHttpRequest();
-xhr.open("GET", "60fps.mp4", true);
-xhr.responseType = "blob";
-xhr.onload = function (e) {
-  if (this.status === 200) {
-    console.log("got it");
-    var myBlob = this.response;
-    var vid = (window.webkitURL || window.URL).createObjectURL(myBlob);
-    // myBlob is now the blob that the object URL pointed to.
-    console.log("Loading video into element");
-    player.setSrc(vid);
-    // not needed if autoplay is set for the video element
-    // video.play()
-  }
-};
+const videoRequest = fetch("60fos.mp4").then((response) => response.blob());
+videoRequest.then((blob) => {
+  const request = indexedDB.open("playerDB", 1);
 
-xhr.send();
+  request.onsuccess = (event: Event) => {
+    const db = event.target as IDBOpenDBRequest;
+    const result = db.result;
+    console.log(result);
+    const transaction = result.transaction("player");
+    console.log(transaction);
+    const objectStore = transaction.objectStore("player");
+    console.log(objectStore);
+    const test = objectStore.get("test");
+    console.log(test);
+
+    test.onerror = (event: any) => {
+      console.log("error");
+    };
+
+    test.onsuccess = (event: any) => {
+      const url = window.URL.createObjectURL(test.result.blob);
+      console.log(url);
+      player.setSrc(url);
+    };
+  };
+
+  request.onupgradeneeded = (event) => {
+    const db = event.target as IDBOpenDBRequest;
+    const result = db.result;
+
+    const objectStore = result.createObjectStore("player", {
+      keyPath: "videoSource",
+    });
+
+    objectStore.transaction.oncomplete = (event) => {
+      const videoObjectStore = result
+        .transaction("player", "readwrite")
+        .objectStore("player");
+      videoObjectStore.add({ name: "test", blob: blob });
+    };
+  };
+});
+
 function App() {
   return <Router />;
 }
