@@ -35,7 +35,11 @@ class MediaPlayer {
 
     //Listener
     this.video.onplay = async () => {};
-    this.video.onseeked = (e) => {};
+    this.video.onseeked = (e) => {
+      console.log(this.video.buffered.start(0));
+      console.log(this.video.buffered.end(0));
+      console.log(this.video.buffered.length);
+    };
     this.video.onclick = () => {
       if (this.isLoop) this.stopLoop();
       if (this.isPause) {
