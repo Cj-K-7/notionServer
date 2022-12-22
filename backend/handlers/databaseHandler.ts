@@ -1,5 +1,6 @@
 import { Handler } from "express";
-import { getDatabase } from "../notionAPI";
+import notionAPI, { getDatabase } from "../notionAPI";
+import { QueryDatabaseParameters } from "@notionhq/client/build/src/api-endpoints";
 
 const getDBbyID: Handler = async (request, response) => {
   const id = request.query.id;
@@ -14,6 +15,32 @@ const getDBbyID: Handler = async (request, response) => {
     return response.status(error.status || 500).json(JSON.parse(error.body));
   }
 };
-const databaseHandlers = { get: getDBbyID };
+
+interface QueryDB {
+  filter: {
+    [key: string]: "string";
+  };
+}
+
+const postQueryDB: Handler = async (request, response) => {
+  try {
+    const database_id = "";
+    const isFormdata = request.is("*/formdata");
+
+    if (!isFormdata) throw new Error();
+
+    const formData = request.body;
+    const queries: QueryDatabaseParameters = {
+      database_id,
+    };
+    const database = await notionAPI.databases.query(queries);
+
+    return response.send(database);
+  } catch (error) {
+    throw new Error("error");
+  }
+};
+
+const databaseHandlers = { get: getDBbyID, post: postQueryDB };
 
 export default databaseHandlers;

@@ -12,8 +12,7 @@ export const player = new MediaPlayer();
 //   player.setSrc(url);
 // };
 // xhr.send();
-
-player.setSrc("video/60fps.mp4");
+timeTest(() => player.setSrc("video/60fps.mp4"));
 
 function App() {
   return <Router />;

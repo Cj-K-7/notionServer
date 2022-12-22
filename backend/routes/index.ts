@@ -11,7 +11,6 @@ const listAllHandler: Handler = async (request, response) => {
   const allDatabases = await searchDatabases();
   return response.send(allDatabases);
 };
-
 router.route("/listAll").get(listAllHandler);
 
 //@User

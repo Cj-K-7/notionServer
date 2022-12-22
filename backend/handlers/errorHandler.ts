@@ -7,6 +7,7 @@ const errorRequsetHandler: ErrorRequestHandler = (
   next
 ) => {
   response.status(error.status).json(JSON.parse(error.body));
+  next();
 };
 
 export default errorRequsetHandler;
