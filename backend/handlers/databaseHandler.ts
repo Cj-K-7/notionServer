@@ -27,7 +27,7 @@ const postQueryDB: Handler = async (request, response) => {
     const database_id = "";
     const isFormdata = request.is("*/formdata");
 
-    if (!isFormdata) throw new Error();
+    if (!isFormdata) throw new Error("need formdata");
 
     const formData = request.body;
     const queries: QueryDatabaseParameters = {

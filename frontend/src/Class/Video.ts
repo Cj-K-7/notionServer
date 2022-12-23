@@ -35,17 +35,11 @@ class MediaPlayer {
 
     //Listener
     this.video.onplay = async () => {};
-    this.video.onseeked = (e) => {
-      console.log(this.video.buffered.start(0));
-      console.log(this.video.buffered.end(0));
-      console.log(this.video.buffered.length);
-    };
     this.video.onclick = () => {
       if (this.isLoop) this.stopLoop();
       if (this.isPause) {
         this.video.play();
         this.isPause = false;
-        console.log("-------resume-------");
       }
     };
     this.video.onpause = () => {
@@ -125,10 +119,8 @@ class MediaPlayer {
         if (isFulfilled) {
           this.video.pause();
           this.isPause = true;
-          console.log("-------pause-------");
           return resolve();
         }
-        console.log("pause frame");
         window.requestAnimationFrame(callback);
       };
       window.requestAnimationFrame(callback);
@@ -149,10 +141,8 @@ class MediaPlayer {
         if (isFulfilled) {
           this.video.currentTime = 0;
           this.end();
-          console.log("-------end-------");
           return resolve();
         }
-        console.log("end frame");
         window.requestAnimationFrame(callback);
       };
       window.requestAnimationFrame(callback);
@@ -170,14 +160,12 @@ class MediaPlayer {
         if (isFulfilled) {
           this.isLoop = false;
           this.toogleEscapeLoop = false;
-          console.log("-------off loop------");
           return resolve();
         }
         if (this.video.currentTime * 1000 >= end) {
           this.video.currentTime = start / 1000;
           if (!this.isLoop) {
             this.isLoop = true;
-            console.log("-------on loop------");
           }
         }
         console.log("loop frame");
