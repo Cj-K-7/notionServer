@@ -3,6 +3,7 @@ import { getPage } from "../notionAPI";
 
 const getPagebyID: Handler = async (request, response) => {
   const id = request.query.id;
+  console.log(id);
   try {
     if (typeof id !== "string")
       return response
