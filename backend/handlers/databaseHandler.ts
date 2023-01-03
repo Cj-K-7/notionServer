@@ -6,18 +6,19 @@ const getVacationPage = (properties: { [key: string]: string }) => {};
 
 const getDBbyID: Handler = async (request, response) => {
   const id = request.query.id;
+  const filter = {};
   try {
     if (typeof id !== "string")
       return response
         .status(400)
         .json({ message: "requires database_id for query" });
 
-    const database = await getDatabase(id);
+    const database = await getDatabase(id, filter);
     {
       const vacations = database.results.filter(
         (result: any) => result.properties["범주"]
       );
-      console.log(vacations);
+      console.log(vacations.map((a: any) => a.properties["날짜"]));
     }
     return response.send(database);
   } catch (error: any) {
