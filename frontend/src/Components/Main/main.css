@@ -6,6 +6,27 @@ div.main {
     align-items: center;
 }
 
-div.main button{
-    z-index: 2;
+ul.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    list-style:none;
+}
+
+ul.main > li > a {
+    display:  flex;
+    align-items: center;
+    color: inherit;
+}
+
+ul.main >  li > a >img{
+    width: 2.5rem;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+ul.main > li > a > p{
+    color: inherit;
 }

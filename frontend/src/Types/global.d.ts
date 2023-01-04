@@ -4,9 +4,16 @@ declare global {
     await func();
     await console.timeEnd("test");
   };
-  type User = {};
-  type Page = {
+  type User = {
     object: string;
+    id: string;
+    name: string;
+    person: { email: string };
+    avatar_url: string;
+  };
+  type Category = { id: string; name: string; color: string };
+  type Page = {
+    object: "page";
     id: string;
     cover: object | null;
     icon: {
@@ -43,7 +50,7 @@ declare global {
     description: any[];
     is_inline: boolean;
     properties: {
-      [x: string]: any;
+      [key: string]: any;
     };
     parent: {
       type: "page_id" | "database_id";
@@ -53,6 +60,53 @@ declare global {
     url: string;
     archived: boolean;
   };
+
+  interface CalendarPage extends Page {}
+
+  type CalendarPagePropType =
+    | "title"
+    | "date"
+    | "people"
+    | "multi_select"
+    | "create_by"
+    | "last_edited_by"
+    | "rich_text";
+
+  interface CalendarPageProp<T extends CalendarPagePropType> {
+    id: string;
+    type: T;
+    // [key: T]: T extends T
+  }
+  interface CalendarPagePropAssign extends CalendarPageProp<"title"> {
+    title: { plain_text: string }[];
+  }
+  interface CalendarPagePropAssign extends CalendarPageProp<"people"> {
+    people: {
+      object: string;
+      id: string;
+      name: string;
+      person: { email: string };
+      avatar_url: string;
+    }[];
+  }
+  interface CalendarPageProp기간 extends CalendarPageProp<"date"> {
+    date: {
+      end: string | null;
+      start: string | null;
+      time_zone: string | null;
+    };
+  }
+  interface CalendarPageProp범주 extends CalendarPageProp<"multi_select"> {
+    multi_select: Category[];
+  }
+  interface CalendarPagePropsCreatedBy extends CalendarPageProp<"create_by"> {
+    create_by: User;
+  }
+  interface CalenderPageProps {
+    Assign: CalendarPagePropAssign;
+    기간: CalendarPageProp기간;
+    범주: CalendarPageProp범주;
+  }
 }
 
 export {};

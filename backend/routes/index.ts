@@ -18,7 +18,7 @@ router.route("/user").get(userHandlers.getUser);
 router.route("/users").get(userHandlers.getUsers);
 
 //@Database
-router.route("/database").get(databaseHandlers.get).post(databaseHandlers.post);
+router.route("/database").get(databaseHandlers.get);
 
 //@Page
 router.route("/page").get(pageHandler.get);

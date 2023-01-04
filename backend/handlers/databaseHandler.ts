@@ -5,20 +5,16 @@ import { QueryDatabaseParameters } from "@notionhq/client/build/src/api-endpoint
 const getVacationPage = (properties: { [key: string]: string }) => {};
 
 const getDBbyID: Handler = async (request, response) => {
-  const id = request.query.id;
-  const filter = {};
+  const query = request.query;
   try {
-    if (typeof id !== "string")
+    if (typeof query.id !== "string")
       return response
         .status(400)
         .json({ message: "requires database_id for query" });
 
-    const database = await getDatabase(id, filter);
+    const database = await getDatabase(query.id);
     {
-      const vacations = database.results.filter(
-        (result: any) => result.properties["범주"]
-      );
-      console.log(vacations.map((a: any) => a.properties["날짜"]));
+      const result = database.results;
     }
     return response.send(database);
   } catch (error: any) {
@@ -32,25 +28,6 @@ interface QueryDB {
   };
 }
 
-const postQueryDB: Handler = async (request, response) => {
-  try {
-    const database_id = "7c44f37100c04f629a058a209560828a";
-    const isFormdata = request.is("*/formdata");
-
-    if (!isFormdata) throw new Error("need formdata");
-
-    const formData = request.body;
-    const queries: QueryDatabaseParameters = {
-      database_id,
-    };
-    const database = await notionAPI.databases.query(queries);
-
-    return response.send(database);
-  } catch (error) {
-    throw new Error("error");
-  }
-};
-
-const databaseHandlers = { get: getDBbyID, post: postQueryDB };
+const databaseHandlers = { get: getDBbyID };
 
 export default databaseHandlers;

@@ -21,18 +21,9 @@ export const getUserList = async () => {
   return userList;
 };
 
-interface DatabaseQueryFilter {
-  or?: { [key: string]: any }[];
-  sorts?: { property: string; direction: "ascending" | "descending" }[];
-}
-
-export const getDatabase = async (
-  database_id: string,
-  filter?: DatabaseQueryFilter
-) => {
+export const getDatabase = async (database_id: string, filter?: any) => {
   const database = await notionAPI.databases.query({
     database_id,
-    filter: filter as any,
   });
   return database;
 };
