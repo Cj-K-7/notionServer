@@ -21,7 +21,7 @@ export const getUserList = async () => {
   return userList;
 };
 
-export const getDatabase = async (database_id: string, filter?: any) => {
+export const getDatabase = async (database_id: string) => {
   const database = await notionAPI.databases.query({
     database_id,
   });

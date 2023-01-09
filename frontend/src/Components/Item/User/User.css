@@ -1,0 +1,16 @@
+ul.user_on_vacation > li > a {
+    display:  flex;
+    align-items: center;
+    color: inherit;
+}
+
+ul.user_on_vacation >  li > a >img{
+    width: 2.5rem;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+ul.user_on_vacation > li > a > p{
+    color: inherit;
+}

@@ -10,7 +10,7 @@ const UserList: React.FC<IUser> = ({ title, ...props }) => {
   //State
   const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState<any[]>();
-  useEffect(() => {}, []);
+
   return (
     <ul {...props}>
       {users

@@ -13,9 +13,6 @@ const getDBbyID: Handler = async (request, response) => {
         .json({ message: "requires database_id for query" });
 
     const database = await getDatabase(query.id);
-    {
-      const result = database.results;
-    }
     return response.send(database);
   } catch (error: any) {
     return response.status(error.status || 500).json(JSON.parse(error.body));
