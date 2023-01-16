@@ -1,6 +1,9 @@
 type PlayEvent = { start: number; end: number };
 type PlayerSchdule = [number, ...(number | PlayEvent)[], number];
-
+type VideoMetadata = {
+  file?: File;
+  bitRate?: number;
+};
 const hidden = "hidden" as const;
 const visible = "visible" as const;
 const fadeIn = "1" as const;
@@ -9,32 +12,54 @@ const transitionTime = 369 as const;
 const initialSchedule: PlayerSchdule = [0, 0];
 
 class MediaPlayer {
-  /** Video element*/
-  private video: HTMLVideoElement;
-  /** Is video in play sequence*/
+  public video: HTMLVideoElement;
+  public metadata: VideoMetadata = {};
+  /** Is video-player visible*/
+  private isActive: boolean = false;
+  /** Is video-player in playing sequence*/
   private isPlaying: boolean = false;
-  /** Is video in pause sequence*/
+  /** Is video-player in pause sequence*/
   private isPause: boolean = false;
-  /** Is video in loop sequence*/
+  /** Is video-player in loop sequence*/
   private isLoop: boolean = false;
   /** Toggle for escaping loop sequence*/
   private toogleEscapeLoop: boolean = false;
   /** Video schedule */
   private schedule: PlayerSchdule = initialSchedule;
 
-  constructor(src?: string) {
+  constructor(url?: string) {
     const video = document.createElement("video");
     document.body.appendChild(video);
     //Default settings
     this.video = video;
     this.video.controls = true;
     this.video.id = "media_player";
-    if (src) {
-      this.video.src = src;
+    if (url) {
+      const ext = url.split(".").pop(); // url
+      const filename = url.split("/").pop(); // url
+      const fileReader = new FileReader();
+      fileReader.onload = (event) => {
+        const bitRate = this.metadata.file!.size / video.duration / 128;
+        this.metadata.bitRate = bitRate;
+        console.log(this.metadata);
+      };
+      this.video.src = url;
+      fetch(url)
+        .then((response) => response.blob())
+        .then((data) => {
+          const type = `video/${ext}`;
+          const file = new File([data], filename!, {
+            type,
+          });
+          this.metadata.file = file;
+          fileReader.readAsDataURL(file);
+        });
     }
 
     //Listener
-    this.video.onplay = async () => {};
+    this.video.onplay = async () => {
+      this.isPlaying = true;
+    };
     this.video.onclick = () => {
       if (this.isLoop) this.stopLoop();
       if (this.isPause) {
@@ -43,6 +68,7 @@ class MediaPlayer {
       }
     };
     this.video.onpause = () => {
+      this.isPlaying = false;
       console.log("video puased");
     };
     this.video.onended = () => {
@@ -54,7 +80,7 @@ class MediaPlayer {
   }
 
   private activateVideo() {
-    this.isPlaying = true;
+    this.isActive = true;
     // this.video.style.visibility = visible;
     // this.video.style.opacity = fadeIn;
   }
