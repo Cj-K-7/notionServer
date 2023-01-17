@@ -1,16 +1,22 @@
-ul.user_on_vacation > li > a {
-    display:  flex;
-    align-items: center;
+ul.user_on_vacation li{
+    height: 3rem;
+    list-style: none;
+}
+ul.user_on_vacation li a {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+    width: 100%;
     color: inherit;
 }
 
-ul.user_on_vacation >  li > a >img{
+ul.user_on_vacation li a img {
+    margin: auto;
     width: 2.5rem;
     height: auto;
     border-radius: 50%;
     object-fit: cover;
 }
 
-ul.user_on_vacation > li > a > p{
+ul.user_on_vacation li a p {
     color: inherit;
 }

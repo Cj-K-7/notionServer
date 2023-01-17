@@ -1,33 +1,15 @@
 import { useState, useEffect } from "react";
-
-const mappingUserData = (page: Page) => {
-  const { id, properties } = page;
-  const { Assign, 기간, 범주 } = properties as CalenderPageProps;
-  return (
-    <li key={id}>
-      {Assign.people.map(({ id, name, person, avatar_url }, index) => {
-        const mailto = `mailto:${person.email}`;
-        const type = 범주.multi_select[index].name;
-        const duration = 기간.date;
-        return (
-          <a key={id} href={mailto}>
-            <img src={avatar_url} />
-            <p>{name}</p>
-            <p>{type}</p>
-            <p>{duration.start}</p>
-            <p>{duration.end}</p>
-          </a>
-        );
-      })}
-    </li>
-  );
-};
+import { classCombine } from "../../../Util/cssClass";
+import "./user.css";
+import UserItem from "./UserItem";
 
 const UsersOnVaction = () => {
+  //State
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [pages, setPages] = useState<Page[]>();
 
   //CSS class
+  const className = classCombine("user_on_vacation");
 
   const getDatabase = async () => {
     const response = await fetch(
@@ -35,7 +17,6 @@ const UsersOnVaction = () => {
     );
     const data = await response.json();
     const { results } = data;
-    console.log(results);
     setPages(results);
   };
 
@@ -44,7 +25,11 @@ const UsersOnVaction = () => {
   }, []);
 
   return !isLoading && pages ? (
-    <ul className="user_on_vacation">{pages.map(mappingUserData)}</ul>
+    <ul className={className}>
+      {pages.map((page) => (
+        <UserItem key={page.id} page={page} />
+      ))}
+    </ul>
   ) : null;
 };
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./User.css";
+import "./user.css";
 import UserItem from "./UserItem";
 
 interface IUser extends React.HTMLAttributes<HTMLUListElement> {
@@ -9,15 +9,8 @@ interface IUser extends React.HTMLAttributes<HTMLUListElement> {
 const UserList: React.FC<IUser> = ({ title, ...props }) => {
   //State
   const [isLoading, setIsLoading] = useState(true);
-  const [users, setUsers] = useState<any[]>();
 
-  return (
-    <ul {...props}>
-      {users
-        ? users.map((user) => <UserItem userName={user.name as string} />)
-        : null}
-    </ul>
-  );
+  return <ul {...props}></ul>;
 };
 
 export default UserList;
