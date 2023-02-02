@@ -10,7 +10,7 @@ class Queue<T> {
   //public function
   public enqueue(queue: T) {
     this.value.push(queue);
-    if (this.isAutoDequeueing && !this.isDequeueing) this.autoDequeue();
+    // if (this.isAutoDequeueing && !this.isDequeueing) this.autoDequeue();
   }
   public dequeue() {
     const out = this.value.shift();
