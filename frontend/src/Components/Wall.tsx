@@ -3,7 +3,7 @@ import useInterval from "./useInterval";
 import "./wall.css";
 
 const Wall = () => {
-  const [queue, setQueue] = useState([9, 8, 7, 6]);
+  const [queue, setQueue] = useState([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]);
 
   const queueing = () => {
     setQueue((state) => [
@@ -19,14 +19,17 @@ const Wall = () => {
 
   return (
     <div className="grid">
+      {queue.map((num) => (
+        <img src={`./asset/img/${num}.jpg`} />
+      ))}
       {/* <div className="first">
         <img src={`./asset/img/${queue[0]}.jpg`} />
-      </div> */}
+      </div>
       <div className="second">
         <img src={`./asset/img/${queue[1]}.jpg`} />
         <img src={`./asset/img/${queue[2]}.jpg`} />
       </div>
-      {/* <div className="third">
+      <div className="third">
         <img src={`./asset/img/${queue[3]}.jpg`} />
         <img src={`./asset/img/${queue[4]}.jpg`} />
         <img src={`./asset/img/${queue[5]}.jpg`} />

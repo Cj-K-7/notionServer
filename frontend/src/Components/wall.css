@@ -1,8 +1,10 @@
 .grid {
-    width: 50vw;
+    width: 100vw;
     height: 100vh;
+    display: grid;
+    grid: 30% / auto-flow dense;
 }
-img{ object-fit: cover;}
+img{ object-fit: cover; max-height: 500px;}
 div.first {
     width: 100%;
 }

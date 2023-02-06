@@ -3,6 +3,7 @@ import cors from "cors";
 import Router from "./routes";
 import errorRequsetHandler from "./handlers/errorHandler";
 import { logger, defaultMiddleWare } from "./middleware";
+import path from "path";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -29,3 +30,7 @@ app.listen(port, () => {
 });
 
 //Default Error Handling
+
+const filePathInfo = path.parse(__filename);
+
+console.log(filePathInfo);
